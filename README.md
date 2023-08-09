@@ -2,6 +2,10 @@
 
 Make assertions against the HTML document on load
 
+## Installation
+
+`npm i -D odyssey-test-utils`
+
 ## Usage
 
 ### HTML
@@ -26,7 +30,7 @@ import "./test-case-wrapper.js";
 const test1 = document.querySelector("#test-1");
 
 test1.test(() => {
-  // Replace this with whichever assertions you need, as long the function returns a boolean
+  // Replace this with whatever assertions you need, as long the function returns a boolean
   return true;
 });
 ```
