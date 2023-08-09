@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@web/dev-server": "^0.3.0"
+    "@web/dev-server": "^0.3.0",
+    "np": "^8.0.4"
   }
 }
