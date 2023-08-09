@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <test-case-wrapper>
+    <test-case id="test-1" description="should pass"></test-case>
+    <test-case id="test-2" description="should fail"></test-case>
+  </test-case-wrapper>
+  <script type="module">
+    import './test-case.js'
+    import './test-case-wrapper.js'
+
+    const test1 = document.querySelector('#test-1')
+
+    test1.test(() => {
+      return true
+    })
+
+    const test2 = document.querySelector('#test-2')
+
+    test2.test(() => {
+      return false
+    }) 
+  </script>
+</body>
+
+</html>
