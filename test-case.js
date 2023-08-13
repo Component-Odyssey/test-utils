@@ -27,9 +27,11 @@ class TestCase extends HTMLElement {
   }
 
   #handleCallback(callback) {
+    const indicator = this.shadowRoot.querySelector('#indicator');
     if (callback()) {
-      const indicator = this.shadowRoot.querySelector('#indicator');
       indicator.textContent = '✅';
+    } else {
+      indicator.textContent = '❌';
     }
   }
 
