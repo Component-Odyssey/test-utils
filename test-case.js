@@ -4,6 +4,8 @@ template.innerHTML = `
   <style>
     #test-case {
       font-family: var(--font-family);
+      display: flex;
+      justify-content: space-between;
     }
   </style>
 
@@ -24,21 +26,45 @@ class TestCase extends HTMLElement {
     shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  test(callback) {
+  #handleCallback(callback) {
     if (callback()) {
-      const indicator = this.shadowRoot.querySelector('#indicator'); 
+      const indicator = this.shadowRoot.querySelector('#indicator');
       indicator.textContent = '✅';
     }
   }
 
+  #handleClick = (callback) => () => {
+    this.#handleCallback(callback);
+    this.button.remove();
+  }
+
+  test(callback) {
+    if (this.hasAttribute('defer')) {
+      this.button.addEventListener('click', this.#handleClick(callback))
+    } else {
+      this.#handleCallback(callback)
+    }
+  }
 
   connectedCallback() {
     const indicator = this.shadowRoot.querySelector('#indicator');
     const description = this.shadowRoot.querySelector('#description');
     const testDescription = this.getAttribute('description')
+    const testCaseEl = this.shadowRoot.querySelector('#test-case');
+
+    const shouldDefer = this.hasAttribute('defer');
 
     description.textContent = testDescription;
+
     indicator.textContent = '❌';
+
+    if (shouldDefer) {
+      indicator.textContent = '🕔';
+
+      this.button = document.createElement('button');
+      this.button.textContent = 'Run';
+      testCaseEl.appendChild(this.button);
+    }
   }
 }
 

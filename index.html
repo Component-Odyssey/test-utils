@@ -11,6 +11,7 @@
   <test-case-wrapper>
     <test-case id="test-1" description="should pass"></test-case>
     <test-case id="test-2" description="should fail"></test-case>
+    <test-case id="test-3" description="should pass after defer" defer></test-case>
   </test-case-wrapper>
   <script type="module">
     import './test-case.js'
@@ -26,6 +27,12 @@
 
     test2.test(() => {
       return false
+    })
+
+    const test3 = document.querySelector('#test-3')
+
+    test3.test(() => {
+      return true
     }) 
   </script>
 </body>
